@@ -1,0 +1,61 @@
+doctype html
+html
+  head
+    title Simple REST client
+    meta name="keywords" content="rest"
+    meta name="author" content=@author
+    link rel="icon" type="image/png" href="/favicon.ico"
+    link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous"
+    link href="/css/index.css" rel="stylesheet"
+    script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"
+    script src="https://cdn.rawgit.com/jonnyreeves/jquery-Mustache/master/jquery.mustache.js" type="text/javascript"
+    script src="https://cdn.rawgit.com/janl/mustache.js/master/mustache.js" type="text/javascript"
+    script src="/js/index.js" type="text/javascript"
+
+  body
+    h1 Simple REST client
+
+    .form
+
+      #api
+        h4 API
+
+        .row
+          .col-lg-12
+            .input-group
+              span#basic-addon-endpoint.input-group-addon Endpoint
+              input.form-control type="text" name="endpoint" aria-describedby="basic-addon-endpoint"
+          .col-lg-12
+            .input-group
+              span#basic-addon-route.input-group-addon Route
+              input.form-control type="text" name="route" aria-describedby="basic-addon-route"
+
+      #params
+        h4 Params
+
+        input.btn.btn-primary#add-param type="button" value="+"
+        input.btn.btn-primary#reset type="button" value="Reset"
+        input.btn.btn-primary.right#submit type="button" value="Send"
+
+        script#param-form type="text/html"
+          .row
+            .col-lg-4
+              .input-group
+                span#basic-addon-name.input-group-addon Name
+                input.form-control.param.name type="text" name="name-param-{{id}}" data-id="{{id}}" aria-describedby="basic-addon-name"
+            .col-lg-8
+              .input-group
+                span#basic-addon-value.input-group-addon Value
+                input.form-control.param.value type="text" name="value-param-{{id}}" data-id="{{id}}" aria-describedby="basic-addon-value"
+
+      #request
+        h4 Request
+        pre.display
+
+
+      #response
+        h4 Response
+        pre.display
+
+    div id="footer"
+      | Copyright &copy; #{@year} #{@author}
