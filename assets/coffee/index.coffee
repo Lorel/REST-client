@@ -25,7 +25,7 @@ $(document).on 'ready', () ->
     url += $route.val()
     url += '?' if $("input.name").filter(() -> this.value).length
     $paramInputs.each (i) ->
-      return unless $("input[name='name-param-" + $(this).data('id') + "']")[0].value
+      return unless $("input[name='name-param-#{$(this).data('id')}']")[0].value
       url += $(this).val()
       if $(this).attr('name').indexOf('value') < 0
         url += '='
@@ -33,13 +33,16 @@ $(document).on 'ready', () ->
         url += '&' if i + 1 != $paramInputs.length
     return url
 
-  $('#submit').on 'click', () ->
+  $('#form').on 'submit', () ->
     $.getJSON compose(), (data) ->
       $response.removeClass('error').text JSON.stringify(data, null, 2)
     .error (err, message) ->
       console.log(err)
-      $response.addClass('error').text(message)
-      $response.append("\nResponse: " + err.responseText) if err.status != 200
+      $response.addClass('error').text("Error: #{message}")
+      $response.append("\nStatus: #{err.status} - #{err.statusText}")
+      $response.append("\nResponse: #{err.responseText}") if err.responseText && err.status != 200
+
+    return false
 
   $('#reset').on 'click', () ->
     $endpoint.val('')
